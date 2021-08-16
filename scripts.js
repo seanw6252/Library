@@ -19,10 +19,6 @@ function addBookToLibrary() {
 
 }
 
-function removeBookFromLibrary() {
-
-}
-
 function updateReadStatus(bookElement, book) {
     bookRead = bookElement.querySelector('.book-read');
     if (book.read) {
@@ -90,10 +86,7 @@ function createBookElement(book, bookIndex) {
     });
     bookElement.appendChild(deleteBook);
    
-    
-    //Temporary for now. Change to return value later
-    const bookContainer = document.querySelector(".book-container");
-    bookContainer.appendChild(bookElement);
+    return bookElement;
 }
 
 function toggleFormVisibility() {
@@ -111,9 +104,31 @@ addBookButton.addEventListener('click', toggleFormVisibility);
 const closeFormButton = document.getElementById("close-button");
 closeFormButton.addEventListener('click', toggleFormVisibility);
 
+const addBookForm = document.getElementById("add-form");
+addBookForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const title = document.getElementById("title").value;
+    const author = document.getElementById("author").value;
+    const pages = document.getElementById("pages").value;
+    const read = document.getElementById("read").checked;
+
+    myLibrary.push(new Book(title, author, pages, read));
+    const bookIndex = myLibrary.length - 1;
+
+    const bookContainer = document.querySelector(".book-container");
+    bookContainer.appendChild(createBookElement(myLibrary[bookIndex], bookIndex));
+
+    form.reset();
+    toggleFormVisibility();
+});
+
 let book1 = new Book("The Hobbit", "J.R.R. Tolkien", 295, false);
 let book2 = new Book("Harry Potter", "J.K. Rowling", 299, false);
 myLibrary.push(book1);
 myLibrary.push(book2);
-createBookElement(book1, 0);
-createBookElement(book2, 1);
+
+const bookContainer = document.querySelector(".book-container"); 
+for (let i = 0; i < myLibrary.length; i++) {
+    bookContainer.appendChild(createBookElement(myLibrary[i], i));
+}

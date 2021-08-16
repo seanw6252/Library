@@ -18,7 +18,7 @@
     <div class="form-container">
         <h1 class="form-heading">Add Book</h1>
         <button type="button" class="close-form" id="close-button">x</button>
-        <form class="add-book-form">
+        <form class="add-book-form" id="add-form">
             <input type="text" name="submitted-title" id="title" placeholder="Title" class="form-input" required>
             <input type="text" name="submitted-author" id="author" placeholder="Author" class="form-input" required>
             <input type="text" name="submitted-pages" id="pages" placeholder="Pages" class="form-input" required>
@@ -26,7 +26,7 @@
                 <label for="read">Read:</label>
                 <input type="checkbox" name="submitted_read" id="read">
             </div>
-            <button type="submit" class="submit-book form-input">Add book</button>
+            <button type="submit" class="submit-book form-input" form="add-form">Add book</button>
         </form>
     </div>
     <div class="book-container">
